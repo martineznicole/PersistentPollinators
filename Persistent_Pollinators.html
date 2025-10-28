@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Pollinators: Nature's Essential Workers</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for a nice nature-inspired color palette and font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4CAF50', // Nature Green
+                        'secondary': '#FFC107', // Pollen Yellow
+                        'accent': '#FF5722', // Monarch Orange
+                        'dark-bg': '#2E7D32', // Darker Green for sections
+                        'text-light': '#FAFAFA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for a cleaner look */
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Style for the game canvas */
+        #pollinator-game-canvas {
+            border: 4px solid #FF5722;
+            background-color: #A0DFA0; /* Light green background */
+            display: block;
+            width: 100%;
+            touch-action: none; /* Disable touch gestures on canvas */
+        }
+        .control-btn {
+            box-shadow: 0 4px 0 0 #14532D;
+            transition: all 0.1s ease;
+        }
+        .control-btn:active {
+            box-shadow: 0 1px 0 0 #14532D;
+            transform: translateY(3px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Header & Hero Section -->
+    <header class="bg-primary text-text-light shadow-lg">
+        <div class="container mx-auto p-6 md:p-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-3">Persistent Pollinators</h1>
+            <p class="text-xl md:text-2xl font-light">Nature's Essential Workers and Why They Matter</p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Introduction Section -->
+        <section class="mb-12 p-6 bg-white rounded-xl card-shadow">
+            <h2 class="text-3xl font-bold text-dark-bg mb-4">What is Pollination?</h2>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                Pollination is the transfer of pollen from a male part of a plant to a female part of a plant, enabling fertilization and the production of seeds and fruits. This crucial process is responsible for one in every three bites of food we eat! 
+                However, **pollinator populations** around the world—including bees, butterflies, and bats—**are in rapid decline** due to habitat loss, pesticide use, and climate change. 
+                Without these essential workers, our ecosystems and food supplies would collapse, making their protection a critical global issue.
+            </p>
+        </section>
+
+        <!-- Pollinator Facts & Backyard Action Guide -->
+        ---
+        <section class="mb-12 p-8 bg-dark-bg text-text-light rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-secondary mb-6 text-center">Pollinator Facts & Backyard Action Guide</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Pollinator Facts Column -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-accent mb-4">Amazing Facts</h3>
+                    <ul class="space-y-3 list-none p-0">
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x2713;</span>
+                            <p>Most bees are **solitary** and do not live in hives. They nest in the ground or in small tunnels in wood.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x2713;</span>
+                            <p>Globally, about **75%** of flowering plants rely on animals for pollination, mostly insects.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x2713;</span>
+                            <p>The **Agave plant** relies heavily on the long-nosed bat for pollination in the American Southwest.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x2713;</span>
+                            <p>A single honey bee colony can pollinate **millions of flowers** in a day!</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Backyard Actions Column -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-accent mb-4">How You Can Help Pollinators</h3>
+                    <ul class="space-y-3 list-none p-0">
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x1F33F;</span>
+                            <p>Plant **Native Flowers**! They are four times more attractive to native bees than non-natives. Include plants like **Milkweed** for Monarch butterflies.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x1F6AB;</span>
+                            <p>**Stop Using Pesticides:** Avoid neonicotinoids and other harmful chemicals, especially when plants are flowering. Look for organic pest control methods.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x1F987;</span>
+                            <p>Install a **Bat Box or Bee Hotel:** Providing safe nesting and roosting structures offers shelter, particularly for solitary bees and bats.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-3 text-xl">&#x1F307;</span>
+                            <p>**Provide a Water Source:** Leave a shallow dish of water with stones or marbles for insects to land on and safely drink.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Longhorn Beetle Game Section (NEW) -->
+        ---
+        <section class="mb-12 p-6 bg-white rounded-xl card-shadow">
+            <h2 class="text-3xl font-bold text-accent mb-4 text-center">The Longhorn Beetle Pollination Challenge 3.0</h2>
+            <p class="text-center text-gray-700 mb-4">Use the **Arrow Keys** (or D-Pad/Click targets below) to control the Longhorn Beetle ($ \bullet $) and complete the **Yellow** and **Blue** pollination chains. Avoid the sticky brown sap and fight the **wind gusts**!</p>
+
+            <div class="relative max-w-2xl mx-auto bg-gray-100 rounded-lg p-2 shadow-inner">
+                <canvas id="pollinator-game-canvas" width="600" height="400" class="rounded-lg"></canvas>
+            </div>
+            
+            <div id="controls-container" class="max-w-xs mx-auto mt-4 p-4 bg-gray-100 rounded-lg md:hidden">
+                <h3 class="text-lg font-semibold text-dark-bg mb-2 text-center">Touch Controls (D-Pad)</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <div></div>
+                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="up">&#x25B2;</button>
+                    <div></div>
+                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="left">&#x25C4;</button>
+                    <button class="bg-gray-300 py-2 rounded-lg text-gray-600 font-bold text-sm">MOVE</button>
+                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="right">&#x25BA;</button>
+                    <div></div>
+                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="down">&#x25BC;</button>
+                    <div></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Interactive Pollinator Discovery Section (Existing) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-accent text-center mb-6">Discover the Diversity of Pollinators</h2>
+
+            <!-- Pollinator Cards Container (Responsive Grid - now 4 columns) -->
+            <div id="pollinator-cards" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                <!-- Card 1: Bees -->
+                <div id="bee-card" class="pollinator-card bg-secondary rounded-xl p-6 text-center cursor-pointer card-shadow" onclick="showPollinator('bee')">
+                    <span class="text-5xl" role="img" aria-label="Bee">&#x1F41D;</span>
+                    <h3 class="text-2xl font-semibold mt-3 text-dark-bg">Bees</h3>
+                    <p class="text-dark-bg opacity-80">The Superstars of Pollination</p>
+                </div>
+
+                <!-- Card 2: Butterflies -->
+                <div id="butterfly-card" class="pollinator-card bg-pink-200 rounded-xl p-6 text-center cursor-pointer card-shadow" onclick="showPollinator('butterfly')">
+                    <span class="text-5xl" role="img" aria-label="Butterfly">&#x1F98B;</span>
+                    <h3 class="text-2xl font-semibold mt-3 text-dark-bg">Butterflies</h3>
+                    <p class="text-dark-bg opacity-80">Beauty with a Purpose</p>
+                </div>
+
+                <!-- Card 3: Hummingbirds -->
+                <div id="bird-card" class="pollinator-card bg-blue-200 rounded-xl p-6 text-center cursor-pointer card-shadow" onclick="showPollinator('bird')">
+                    <span class="text-5xl" role="img" aria-label="Hummingbird">&#x1F426;</span>
+                    <h3 class="text-2xl font-semibold mt-3 text-dark-bg">Birds</h3>
+                    <p class="text-dark-bg opacity-80">Fast and Furious Flyers</p>
+                </div>
+
+                <!-- Card 4: Bats -->
+                <div id="bat-card" class="pollinator-card bg-purple-300 rounded-xl p-6 text-center cursor-pointer card-shadow" onclick="showPollinator('bat')">
+                    <span class="text-5xl" role="img" aria-label="Bat">&#x1F987;</span>
+                    <h3 class="text-2xl font-semibold mt-3 text-dark-bg">Bats</h3>
+                    <p class="text-dark-bg opacity-80">Nocturnal Nectar Feeders</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Dynamic Information Panel (Existing) -->
+        <section id="info-panel" class="hidden mt-8 p-8 bg-white border-4 border-accent rounded-xl shadow-2xl">
+            <h3 id="panel-title" class="text-4xl font-extrabold mb-4 text-dark-bg"></h3>
+            <div class="md:flex md:space-x-8">
+                <div class="md:w-2/3">
+                    <h4 class="text-2xl font-semibold text-primary mb-2">Role in Nature:</h4>
+                    <p id="panel-role" class="text-gray-700 mb-4"></p>
+                    <h4 class="text-2xl font-semibold text-primary mb-2">Fun Fact:</h4>
+                    <p id="panel-fact" class="text-gray-700 mb-4 italic"></p>
+                </div>
+                <div class="md:w-1/3 mt-4 md:mt-0 p-4 bg-gray-100 rounded-lg">
+                    <h4 class="text-xl font-bold text-accent mb-3">Take Action!</h4>
+                    <p id="panel-action" class="text-gray-600 mb-4 text-sm"></p>
+                    <button id="action-button" class="w-full bg-accent hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full transition duration-300" onclick="performAction()"></button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Share Your Action Section (Existing Form) -->
+        ---
+        <section id="share-action" class="mt-12 mb-12 p-6 bg-white rounded-xl card-shadow">
+            <h2 class="text-3xl font-bold text-dark-bg mb-4 text-center">Share Your Pollinator Action!</h2>
+            <p class="text-center text-gray-600 mb-6">Join the community by logging what you're doing to help pollinators. Your action will be saved to our public map!</p>
+
+            <div class="max-w-xl mx-auto space-y-4">
+                <div>
+                    <label for="action-location" class="block text-sm font-medium text-gray-700">Your Location (City, State/Country)</label>
+                    <input type="text" id="action-location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="e.g., San Francisco, CA" required>
+                </div>
+                <div>
+                    <label for="action-description" class="block text-sm font-medium text-gray-700">Your Action (What did you do?)</label>
+                    <textarea id="action-description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="e.g., I planted milkweed in my garden." required></textarea>
+                </div>
+                <div>
+                    <label for="action-photo-url" class="block text-sm font-medium text-gray-700">Optional Photo URL (Link to image - Max 1MB)</label>
+                    <input type="url" id="action-photo-url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="https://example.com/my-garden.jpg">
+                </div>
+                <button id="submit-action-btn" class="w-full bg-primary hover:bg-dark-bg text-white font-bold py-3 px-4 rounded-full transition duration-300 disabled:opacity-50" onclick="savePollinatorAction()">
+                    Submit Action
+                </button>
+                <p id="action-message-status" class="text-center text-sm mt-2 hidden"></p>
+                <p id="user-id-display" class="text-xs text-center text-gray-400 mt-4"></p>
+            </div>
+        </section>
+
+        <!-- Community Action Feed (NEW) -->
+        <section id="community-actions" class="mt-12 mb-12 p-6 bg-white rounded-xl card-shadow">
+            <h2 class="text-3xl font-bold text-accent mb-4 text-center">Community Action Feed</h2>
+            <p class="text-center text-gray-600 mb-6">See the latest actions taken by people around the world!</p>
+
+            <!-- Container for dynamically loaded actions -->
+            <div id="latest-actions-container" class="space-y-4">
+                <p class="text-center text-gray-500" id="loading-actions">Loading community actions...</p>
+            </div>
+        </section>
+
+        <!-- Footer / Call to Action -->
+        <footer class="mt-12 p-6 bg-dark-bg rounded-xl text-center">
+            <p class="text-text-light text-lg mb-2">You can help protect pollinators!</p>
+            <p class="text-gray-300">Plant native flowers, avoid pesticides, and spread the word.</p>
+        </footer>
+
+    </main>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, setLogLevel, onSnapshot, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Variables for Firebase
+        let db = null;
+        let auth = null;
+        let userId = null;
+        let isFirebaseReady = false;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Set log level for debugging
+        setLogLevel('Debug');
+
+        async function initializeFirebase() {
+            try {
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Authentication
+                const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                // Get the current user ID
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                isFirebaseReady = true;
+                console.log("Firebase initialized and authenticated. User ID:", userId);
+                
+                // Display the User ID for reference (MANDATORY for multi-user apps)
+                document.getElementById('user-id-display').textContent = `Your User ID: ${userId}`;
+                
+                // Initial call to show pollinator data and start the action feed
+                showPollinator('bee');
+                fetchCommunityActions();
+                startGame(); // Start the new game!
+
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                const status = document.getElementById('action-message-status');
+                status.textContent = "Error initializing sharing features. Check console for details.";
+                status.classList.remove('hidden');
+                status.classList.add('text-red-600');
+            }
+        }
+
+        /**
+         * Listens to and displays the latest community actions from Firestore.
+         */
+        function fetchCommunityActions() {
+            if (!isFirebaseReady) {
+                console.error('Firebase is not ready to fetch actions.');
+                return;
+            }
+
+            const actionsContainer = document.getElementById('latest-actions-container');
+            const loadingElement = document.getElementById('loading-actions');
+            
+            // Public data path: /artifacts/{appId}/public/data/pollinator_actions
+            const actionsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'pollinator_actions');
+            
+            // Query to get the latest 10 actions
+            const actionsQuery = query(
+                actionsCollectionRef,
+                limit(10) // Fetch up to 10 documents
+            );
+
+            onSnapshot(actionsQuery, (snapshot) => {
+                loadingElement.classList.add('hidden');
+                actionsContainer.innerHTML = ''; // Clear existing actions
+
+                if (snapshot.empty) {
+                    actionsContainer.innerHTML = '<p class="text-center text-gray-500">Be the first to share an action!</p>';
+                    return;
+                }
+
+                // Convert snapshot to array and sort manually by timestamp (descending)
+                const actions = [];
+                snapshot.forEach(doc => {
+                    actions.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // Manual sort based on timestamp string
+                actions.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+
+                // Take the top 5 after sorting
+                const latestActions = actions.slice(0, 5);
+
+                latestActions.forEach(action => {
+                    const actionElement = document.createElement('div');
+                    actionElement.className = 'bg-gray-50 p-4 rounded-lg border-l-4 border-primary shadow-sm';
+                    
+                    const photoHtml = action.photoUrl ? 
+                        `<a href="${action.photoUrl}" target="_blank" class="text-primary hover:underline text-sm block mb-2 truncate">
+                            <span role="img" aria-label="Photo">&#x1F4F8;</span> View Photo
+                        </a>
+                        <img src="${action.photoUrl}" onerror="this.onerror=null; this.src='https://placehold.co/150x100/A0DFA0/ffffff?text=Image+Error'" class="w-full h-32 object-cover rounded-md mb-2">`
+                        : '';
+
+                    actionElement.innerHTML = `
+                        <p class="text-sm font-semibold text-dark-bg">${action.location}
+                            <span class="text-xs font-normal text-gray-500 ml-2">(${new Date(action.timestamp).toLocaleDateString()})</span>
+                        </p>
+                        <p class="text-gray-800 my-2">${action.action}</p>
+                        ${photoHtml}
+                        <p class="text-xs text-gray-400 truncate">User ID: ${action.userId}</p>
+                    `;
+                    actionsContainer.appendChild(actionElement);
+                });
+            }, (error) => {
+                console.error("Error listening to community actions: ", error);
+                actionsContainer.innerHTML = '<p class="text-center text-red-600">Failed to load community feed.</p>';
+            });
+        }
+
+
+        // Function to save the user's pollinator action to Firestore (Existing, minor update for clarity)
+        window.savePollinatorAction = async function() {
+            if (!isFirebaseReady) {
+                console.error('Sharing features are not yet ready. Please wait a moment.');
+                return;
+            }
+
+            const location = document.getElementById('action-location').value.trim();
+            const description = document.getElementById('action-description').value.trim();
+            const photoUrl = document.getElementById('action-photo-url').value.trim();
+
+            const statusElement = document.getElementById('action-message-status');
+            const button = document.getElementById('submit-action-btn');
+
+            statusElement.textContent = '';
+            statusElement.classList.add('hidden');
+            
+            if (!location || !description) {
+                statusElement.textContent = 'Please provide a location and describe your action.';
+                statusElement.classList.remove('hidden');
+                statusElement.classList.add('text-accent');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Submitting...';
+            statusElement.textContent = 'Saving data...';
+            statusElement.classList.remove('hidden', 'text-accent', 'text-red-600', 'text-green-600');
+            statusElement.classList.add('text-blue-600');
+
+            try {
+                // Public data path: /artifacts/{appId}/public/data/pollinator_actions
+                const actionsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'pollinator_actions');
+
+                await addDoc(actionsCollectionRef, {
+                    userId: userId, // User ID who submitted
+                    location: location,
+                    action: description,
+                    photoUrl: photoUrl || null,
+                    // Use a standard ISO string for sorting purposes
+                    timestamp: new Date().toISOString()
+                });
+
+                // Success Feedback
+                statusElement.textContent = 'Success! Your action has been shared with the community.';
+                statusElement.classList.remove('text-blue-600');
+                statusElement.classList.add('text-green-600');
+                
+                // Clear form
+                document.getElementById('action-location').value = '';
+                document.getElementById('action-description').value = '';
+                document.getElementById('action-photo-url').value = '';
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                statusElement.textContent = 'Error: Could not save your action. See console for details.';
+                statusElement.classList.remove('text-blue-600', 'text-green-600');
+                statusElement.classList.add('text-red-600');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Submit Action';
+                setTimeout(() => {
+                    statusElement.classList.add('hidden');
+                }, 5000); // Hide status message after 5 seconds
+            }
+        }
+
+        // Data for the interactive section (Existing)
+        const pollinatorData = {
+            bee: {
+                title: "The Buzzing Bee",
+                role: "Bees, especially native species and honey bees, are responsible for pollinating over 100 crop species globally. They use 'pollen baskets' on their legs to carry pollen efficiently.",
+                fact: "Only female bees sting, and most native bees (like Mason Bees) rarely sting and don't live in large colonies!",
+                action: "Planting a diverse range of flowering plants, especially native ones, provides continuous food for bees throughout the seasons.",
+                buttonText: "See Bee-Friendly Plants"
+            },
+            butterfly: {
+                title: "The Fluttering Butterfly",
+                role: "Butterflies are important secondary pollinators. They are attracted to large, bright flowers that have landing pads, such as zinnias and coneflowers. They mainly pollinate daytime flowers.",
+                fact: "Monarch butterflies undertake a multi-generational migration across North America, pollinating flowers along their entire route!",
+                action: "Creating a 'waystation' with milkweed (their host plant) and nectar sources helps sustain migrating populations.",
+                buttonText: "Learn About Milkweed"
+            },
+            bird: {
+                title: "The Zippy Hummingbird",
+                role: "Birds, particularly hummingbirds, are attracted to red or orange, tubular flowers that bees cannot easily access. They sip nectar while pollen is deposited on their heads and beaks.",
+                fact: "Hummingbirds must eat roughly half their body weight in sugar every day to fuel their fast metabolism and flight!",
+                action: "Hang a hummingbird feeder (using only sugar and water, no dyes) and plant bright, tubular flowers like salvia or petunias.",
+                buttonText: "Find Hummingbird Flowers"
+            },
+            bat: {
+                title: "The Flying Fox Bat",
+                role: "Bats are primary pollinators for night-blooming plants, especially in desert and tropical ecosystems. They are essential for plants like cacti, agave, and many fruit trees (e.g., bananas).",
+                fact: "Some flowering plants have evolved to reflect sonar, making them easier for bats to locate in the dark!",
+                action: "Protecting natural cave habitats and reducing light pollution in desert and tropical areas is crucial for bat survival.",
+                buttonText: "Protect Bat Habitats"
+            }
+        };
+
+        let currentPollinator = null;
+
+        /**
+         * Shows the detailed information for the selected pollinator. (Existing)
+         * @param {string} type - The key of the pollinator data (e.g., 'bee', 'butterfly').
+         */
+        window.showPollinator = function(type) {
+            const panel = document.getElementById('info-panel');
+            const title = document.getElementById('panel-title');
+            const role = document.getElementById('panel-role');
+            const fact = document.getElementById('panel-fact');
+            const action = document.getElementById('panel-action');
+            const button = document.getElementById('action-button');
+            const data = pollinatorData[type];
+
+            // Toggle visibility if the same card is clicked twice
+            if (currentPollinator === type && !panel.classList.contains('hidden')) {
+                panel.classList.add('hidden');
+                currentPollinator = null;
+                return;
+            }
+
+            // Update content
+            title.textContent = data.title;
+            role.textContent = data.role;
+            fact.textContent = data.fact;
+            action.textContent = data.action;
+            button.textContent = data.buttonText;
+            button.setAttribute('data-type', type);
+
+            // Ensure the panel is visible and scroll to it
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+            }
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            currentPollinator = type;
+        }
+
+        /**
+         * Placeholder function for the action button. (Existing)
+         */
+        window.performAction = function() {
+            const button = document.getElementById('action-button');
+            const type = button.getAttribute('data-type');
+            const actionText = button.textContent;
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'action-message';
+            messageBox.className = 'fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50';
+            messageBox.innerHTML = `
+                <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm text-center">
+                    <h4 class="text-2xl font-bold text-primary mb-4">Action Triggered!</h4>
+                    <p class="text-gray-700 mb-6">You clicked: <span class="font-semibold text-accent">${actionText}</span>!</p>
+                    <p class="text-sm text-gray-500 mb-4">In a full application, this would load detailed planting guides for ${type} pollinators.</p>
+                    <button class="bg-primary hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full" onclick="document.getElementById('action-message').remove()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(messageBox);
+        }
+
+        // --- GAME LOGIC START (UPDATED FOR COMPLEXITY) ---
+        
+        let canvas, ctx;
+        // Updated beetle state to carry pollen type
+        let beetle = { x: 50, y: 50, size: 20, velX: 0, velY: 0, baseSpeed: 3, speed: 3, pollenType: null };
+        let gameStage = 0; // 0: Start Screen, 1: Playing, 2: Win Screen
+        let keys = {};
+
+        // --- WIND GUST STATE ---
+        let wind = {
+            isGusting: false,
+            direction: 'none', // 'up', 'down', 'left', 'right'
+            strength: 0,
+            gustDuration: 3000, // 3 seconds
+            intervalMin: 8000, // 8 seconds min wait
+            intervalMax: 15000, // 15 seconds max wait
+            nextGustTime: 0,
+            gustEndTime: 0
+        };
+        // --- END WIND GUST STATE ---
+        
+        // Define the sticky sap area
+        const SLOW_ZONE = { x: 250, y: 150, width: 100, height: 100, color: '#A0522D', effect: 0.5 }; // Sienna Brown
+
+        // Define the flowers and their required pollen (UPDATED)
+        const FLOWERS_DATA = [
+            // Pollen Chain 1: Yellow Pollen (Carrot Chain)
+            { id: 0, x: 500, y: 80, name: "QAL (Yellow Source)", color: '#FFC107', pollen: 'yellow', isSource: true, emoji: '🌼', radius: 25, requiredBy: null }, 
+            { id: 1, x: 100, y: 300, name: "Wild Radish (Target)", color: '#FFC107', pollen: 'yellow', isSource: false, emoji: '🌿', radius: 25, requiredBy: 'yellow' },
+            { id: 2, x: 500, y: 300, name: "QAL/Carrot (Final)", color: '#FFA000', pollen: 'yellow', isSource: false, emoji: '🥕', radius: 30, requiredBy: 'yellow' }, 
+
+            // Pollen Chain 2: Blue Pollen
+            { id: 3, x: 100, y: 80, name: "Clover (Blue Source)", color: '#1E88E5', pollen: 'blue', isSource: true, emoji: '🌸', radius: 25, requiredBy: null },
+            { id: 4, x: 300, y: 190, name: "Bluebell (Target)", color: '#1E88E5', pollen: 'blue', isSource: false, emoji: '🫐', radius: 25, requiredBy: 'blue' }, 
+        ];
+
+        let flowerStates; // Initialized in resetGame
+
+        function initializeGame() {
+            canvas = document.getElementById('pollinator-game-canvas');
+            ctx = canvas.getContext('2d');
+            
+            resizeCanvas(); 
+            window.addEventListener('resize', resizeCanvas);
+
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
+
+            // Touch controls for mobile
+            document.querySelectorAll('.control-btn').forEach(button => {
+                button.addEventListener('mousedown', handleTouchStart);
+                button.addEventListener('mouseup', handleTouchEnd);
+                button.addEventListener('touchstart', handleTouchStart, { passive: true });
+                button.addEventListener('touchend', handleTouchEnd, { passive: true });
+            });
+
+            gameLoop();
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth - 4; 
+            canvas.height = 400; 
+        }
+        
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const dir = this.getAttribute('data-dir');
+            if (dir) {
+                keys[dir] = true;
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            const dir = this.getAttribute('data-dir');
+            if (dir) {
+                keys[dir] = false;
+            }
+        }
+
+
+        function handleKeyDown(e) {
+            keys[e.key] = true;
+        }
+
+        function handleKeyUp(e) {
+            keys[e.key] = false;
+        }
+
+        function isPointInRect(px, py, rect) {
+            return px > rect.x && px < rect.x + rect.width &&
+                   py > rect.y && py < rect.y + rect.height;
+        }
+
+        // Functions for Wind Gust Timing
+        function startWindTimer() {
+            wind.nextGustTime = Date.now() + wind.intervalMin + Math.random() * (wind.intervalMax - wind.intervalMin);
+        }
+
+        function activateGust() {
+            wind.isGusting = true;
+            wind.direction = ['up', 'down', 'left', 'right'][Math.floor(Math.random() * 4)];
+            wind.strength = 1 + Math.random() * 2; // Strength between 1 and 3
+            wind.gustEndTime = Date.now() + wind.gustDuration;
+            console.log(`Wind Gust activated: ${wind.direction} at strength ${wind.strength.toFixed(2)}`);
+        }
+
+
+        function update() {
+            if (gameStage !== 1) return;
+
+            const now = Date.now();
+
+            // --- Wind Gust Logic Update ---
+            if (wind.isGusting) {
+                if (now > wind.gustEndTime) {
+                    wind.isGusting = false;
+                    wind.direction = 'none';
+                    wind.strength = 0;
+                    startWindTimer(); // Set timer for next gust
+                    console.log("Wind Gust ended. Next gust scheduled.");
+                }
+            } else {
+                if (now > wind.nextGustTime) {
+                    activateGust(); // Start a new gust
+                }
+            }
+            // --- End Wind Gust Logic Update ---
+
+
+            // --- Obstacle Logic (Complexity 2) ---
+            const inSlowZone = isPointInRect(beetle.x, beetle.y, SLOW_ZONE);
+            beetle.speed = inSlowZone ? beetle.baseSpeed * SLOW_ZONE.effect : beetle.baseSpeed;
+
+            // Reset velocity
+            beetle.velX = 0;
+            beetle.velY = 0;
+
+            // Handle Movement (User Input)
+            if (keys['ArrowUp'] || keys['up']) beetle.velY = -beetle.speed;
+            if (keys['ArrowDown'] || keys['down']) beetle.velY = beetle.speed;
+            if (keys['ArrowLeft'] || keys['left']) beetle.velX = -beetle.speed;
+            if (keys['ArrowRight'] || keys['right']) beetle.velX = beetle.speed;
+
+            // --- Apply Wind Force (Additive) ---
+            if (wind.isGusting) {
+                switch (wind.direction) {
+                    case 'up': beetle.velY -= wind.strength; break;
+                    case 'down': beetle.velY += wind.strength; break;
+                    case 'left': beetle.velX -= wind.strength; break;
+                    case 'right': beetle.velX += wind.strength; break;
+                }
+            }
+            // --- End Apply Wind Force ---
+
+            // Update position
+            beetle.x += beetle.velX;
+            beetle.y += beetle.velY;
+
+            // Keep beetle within canvas bounds
+            beetle.x = Math.max(beetle.size / 2, Math.min(canvas.width - beetle.size / 2, beetle.x));
+            beetle.y = Math.max(beetle.size / 2, Math.min(canvas.height - beetle.size / 2, beetle.y));
+
+            // --- Pollination Logic (Complexity 1) ---
+            let allPollinated = true;
+
+            flowerStates.forEach((flower, index) => {
+                if (!flower.isSource && !flower.pollinated) {
+                    allPollinated = false; // Check for win condition
+                }
+
+                if (flower.pollinated) return; 
+
+                const dx = beetle.x - flower.x;
+                const dy = beetle.y - flower.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < beetle.size / 2 + flower.radius) {
+                    // Collision detected!
+
+                    if (flower.isSource) { // This is a pollen source
+                        if (beetle.pollenType !== flower.pollen) {
+                            beetle.pollenType = flower.pollen; // Collect new pollen type
+                            flowerStates.forEach(f => f.pollenCollected = false); // Reset other source visual status
+                            flowerStates[index].pollenCollected = true;
+                            console.log(`Pollen collected: ${flower.pollen}!`);
+                        }
+                    } else { // This is a target flower
+                        if (beetle.pollenType === flower.requiredBy) {
+                            // Correct pollen dropped!
+                            beetle.pollenType = null; // Pollen used up
+                            flowerStates[index].pollinated = true;
+                            console.log(`Target ${flower.name} pollinated!`);
+                        }
+                    }
+                }
+            });
+
+            // Check for Win Condition
+            if (allPollinated) {
+                gameStage = 2; // WIN!
+            }
+        }
+
+        function drawBeetle() {
+            ctx.fillStyle = 'black';
+            ctx.font = `${beetle.size * 1.5}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('\u2022', beetle.x, beetle.y); 
+
+            if (beetle.pollenType) {
+                // Draw pollen mark based on type
+                ctx.fillStyle = beetle.pollenType === 'yellow' ? 'yellow' : '#1E88E5'; // Blue
+                ctx.beginPath();
+                ctx.arc(beetle.x + beetle.size / 2, beetle.y - beetle.size / 2, beetle.size / 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawFlowers() {
+            flowerStates.forEach(flower => {
+                let displayColor = flower.color;
+
+                // 1. Draw Stem
+                ctx.fillStyle = '#4CAF50';
+                ctx.fillRect(flower.x - 3, flower.y + flower.radius, 6, 40);
+
+                // 2. Determine and Draw Flower Circle
+                if (flower.pollinated) {
+                    displayColor = '#6D4C41'; // Brown for finished state
+                } 
+                
+                ctx.fillStyle = displayColor;
+                ctx.beginPath();
+                ctx.arc(flower.x, flower.y, flower.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 3. Draw Emoji Label
+                ctx.font = '20px Arial';
+                ctx.fillStyle = 'black';
+                ctx.fillText(flower.emoji, flower.x, flower.y - flower.radius - 5);
+                
+                // 4. Draw name/status label
+                ctx.font = '14px Inter';
+                ctx.fillStyle = '#2E7D32';
+                ctx.fillText(flower.name, flower.x, flower.y + flower.radius + 60);
+
+                // 5. Draw Required Action/Status
+                ctx.font = '12px Inter';
+                
+                if (flower.pollinated) {
+                     ctx.fillStyle = '#14532D';
+                     ctx.fillText("POLLINATED!", flower.x, flower.y + flower.radius + 80);
+                } else if (flower.isSource) {
+                    ctx.fillStyle = beetle.pollenType === flower.pollen ? '#6D4C41' : flower.color;
+                    ctx.fillText(`COLLECT ${flower.pollen.toUpperCase()} POLLEN`, flower.x, flower.y + flower.radius + 80);
+                } else { // Target flower
+                    if (beetle.pollenType === flower.requiredBy) {
+                        ctx.fillStyle = flower.requiredBy;
+                        ctx.fillText("DROP CORRECT POLLEN!", flower.x, flower.y + flower.radius + 80);
+                    } else if (beetle.pollenType && beetle.pollenType !== flower.requiredBy) {
+                        ctx.fillStyle = 'red';
+                        ctx.fillText(`WRONG POLLEN (${beetle.pollenType.toUpperCase()})`, flower.x, flower.y + flower.radius + 80);
+                    } else {
+                        ctx.fillStyle = '#2E7D32';
+                        ctx.fillText(`NEEDS ${flower.requiredBy.toUpperCase()} POLLEN`, flower.x, flower.y + flower.radius + 80);
+                    }
+                }
+            });
+        }
+        
+        function drawObstacle() {
+            // Draw Sticky Sap zone
+            ctx.fillStyle = SLOW_ZONE.color;
+            ctx.globalAlpha = 0.7;
+            ctx.fillRect(SLOW_ZONE.x, SLOW_ZONE.y, SLOW_ZONE.width, SLOW_ZONE.height);
+            ctx.globalAlpha = 1.0;
+            
+            // Draw label
+            ctx.fillStyle = 'white';
+            ctx.font = '16px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('STICKY SAP', SLOW_ZONE.x + SLOW_ZONE.width / 2, SLOW_ZONE.y + SLOW_ZONE.height / 2);
+        }
+
+        function drawWindIndicator() {
+            if (!wind.isGusting) return;
+
+            const cx = canvas.width / 2;
+            const cy = 40; // Position near the top
+
+            ctx.save();
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'rgba(255, 69, 0, 0.8)'; // Red/Orange color
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+
+            // Draw "WIND GUST!" text
+            ctx.font = '30px Impact, sans-serif';
+            ctx.fillText('WIND GUST!', cx, cy + 5);
+
+            // Determine rotation and arrow text
+            let arrow = ''; 
+
+            switch (wind.direction) {
+                case 'up':
+                    arrow = '▲';
+                    break;
+                case 'down':
+                    arrow = '▼';
+                    break;
+                case 'left':
+                    arrow = '◀';
+                    break;
+                case 'right':
+                    arrow = '▶';
+                    break;
+            }
+            
+            // Draw the directional arrow
+            ctx.font = '50px Arial';
+            ctx.fillStyle = 'rgba(255, 69, 0, 1.0)';
+            ctx.fillText(arrow, cx, cy + 50);
+
+            ctx.restore();
+        }
+
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            ctx.fillStyle = '#A0DFA0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (gameStage === 0) {
+                drawStartScreen();
+            } else if (gameStage === 1) {
+                drawObstacle();
+                drawFlowers();
+                drawBeetle();
+                drawStatus();
+                drawWindIndicator(); // Draw the new indicator
+            } else if (gameStage === 2) {
+                drawWinScreen();
+            }
+        }
+        
+        function drawStartScreen() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '30px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('The Pollination Challenge 3.0 (with Wind Gusts!)', canvas.width / 2, canvas.height / 3);
+            ctx.font = '18px Inter';
+            ctx.fillText('Complete BOTH the YELLOW and BLUE pollen chains.', canvas.width / 2, canvas.height / 3 + 40);
+            ctx.fillText('Avoid the sticky sap, and brace for random wind!', canvas.width / 2, canvas.height / 3 + 70);
+            ctx.fillText('Press SPACE or click to start.', canvas.width / 2, canvas.height / 2 + 30);
+        }
+
+        function drawWinScreen() {
+            ctx.fillStyle = 'rgba(46, 125, 50, 0.9)'; // Darker green overlay
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '40px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('LEVEL COMPLETE! PLANTS FLOURISH!', canvas.width / 2, canvas.height / 3);
+            
+            // Draw Carrot and Blueberries
+            ctx.font = '60px Arial';
+            ctx.fillText('🥕', canvas.width / 2 - 80, canvas.height / 2 + 30);
+            ctx.fillText('🫐', canvas.width / 2 + 80, canvas.height / 2 + 30);
+
+            ctx.font = '20px Inter';
+            ctx.fillText('You successfully cross-pollinated both plant species.', canvas.width / 2, canvas.height / 2 + 80);
+            ctx.fillText('Press R or click to restart.', canvas.width / 2, canvas.height / 2 + 120);
+        }
+
+        function drawStatus() {
+            const pollenStatus = beetle.pollenType ? `Pollen: ${beetle.pollenType.toUpperCase()}` : "Pollen: EMPTY";
+            const speedStatus = beetle.speed < beetle.baseSpeed ? "SPEED: SLOWED (Sap!)" : "SPEED: NORMAL";
+            
+            ctx.fillStyle = '#2E7D32';
+            ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
+            
+            ctx.fillStyle = 'white';
+            ctx.font = '14px Inter';
+            
+            ctx.textAlign = 'left';
+            ctx.fillText(pollenStatus, 10, canvas.height - 10);
+            
+            ctx.textAlign = 'center';
+            ctx.fillText(speedStatus, canvas.width / 2, canvas.height - 10);
+
+            ctx.textAlign = 'right';
+            const progress = flowerStates.filter(f => !f.isSource && f.pollinated).length;
+            const totalTargets = flowerStates.filter(f => !f.isSource).length;
+            ctx.fillText(`Targets: ${progress}/${totalTargets}`, canvas.width - 10, canvas.height - 10);
+        }
+
+        function gameLoop() {
+            update();
+            drawGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function resetGame() {
+            beetle = { x: 50, y: 50, size: 20, velX: 0, velY: 0, baseSpeed: 3, speed: 3, pollenType: null };
+            gameStage = 1;
+            // Create a fresh copy of flower states
+            flowerStates = FLOWERS_DATA.map(f => ({
+                ...f,
+                pollinated: false,
+                pollenCollected: false
+            }));
+
+            // Reset Wind State on game reset
+            wind = {
+                isGusting: false,
+                direction: 'none',
+                strength: 0,
+                gustDuration: 3000, 
+                intervalMin: 8000, 
+                intervalMax: 15000, 
+                nextGustTime: 0,
+                gustEndTime: 0
+            };
+            startWindTimer(); // Start the first timer
+        }
+
+        function handleGameInput(e) {
+            if (e.key === ' ' && gameStage === 0) {
+                e.preventDefault();
+                resetGame();
+            }
+            if (e.key === 'r' && gameStage === 2) {
+                e.preventDefault();
+                resetGame();
+            }
+        }
+        
+        function handleGameClick(e) {
+            if (gameStage === 0 || gameStage === 2) {
+                 e.preventDefault();
+                 resetGame();
+            }
+        }
+
+        window.startGame = function() {
+            initializeGame();
+            document.addEventListener('keydown', handleGameInput);
+            canvas.addEventListener('click', handleGameClick);
+        }
+
+        // --- GAME LOGIC END ---
+
+        // Call the initialization function when the window loads
+        window.onload = initializeFirebase;
+
+    </script>
+</body>
+</html>
