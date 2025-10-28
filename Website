@@ -70,7 +70,9 @@
         <section class="mb-12 p-6 bg-white rounded-xl card-shadow">
             <h2 class="text-3xl font-bold text-dark-bg mb-4">What is Pollination?</h2>
             <p class="text-gray-700 text-lg leading-relaxed">
-                Pollination is the transfer of pollen from a male part of a plant to a female part of a plant, enabling fertilization and the production of seeds and fruits. This crucial process is responsible for one in every three bites of food we eat! Without pollinators, our ecosystems and food supplies would collapse.
+                Pollination is the transfer of pollen from a male part of a plant to a female part of a plant, enabling fertilization and the production of seeds and fruits. This crucial process is responsible for one in every three bites of food we eat! 
+                However, **pollinator populations** around the world—including bees, butterflies, and bats—**are in rapid decline** due to habitat loss, pesticide use, and climate change. 
+                Without these essential workers, our ecosystems and food supplies would collapse, making their protection a critical global issue.
             </p>
         </section>
 
@@ -131,8 +133,8 @@
         <!-- Longhorn Beetle Game Section (NEW) -->
         ---
         <section class="mb-12 p-6 bg-white rounded-xl card-shadow">
-            <h2 class="text-3xl font-bold text-accent mb-4 text-center">The Longhorn Beetle Pollination Challenge 2.0</h2>
-            <p class="text-center text-gray-700 mb-4">Use the **Arrow Keys** (or D-Pad/Click targets below) to control the Longhorn Beetle ($ \bullet $) and complete the **Yellow** and **Blue** pollination chains. Avoid the sticky brown sap!</p>
+            <h2 class="text-3xl font-bold text-accent mb-4 text-center">The Longhorn Beetle Pollination Challenge 3.0</h2>
+            <p class="text-center text-gray-700 mb-4">Use the **Arrow Keys** (or D-Pad/Click targets below) to control the Longhorn Beetle ($ \bullet $) and complete the **Yellow** and **Blue** pollination chains. Avoid the sticky brown sap and fight the **wind gusts**!</p>
 
             <div class="relative max-w-2xl mx-auto bg-gray-100 rounded-lg p-2 shadow-inner">
                 <canvas id="pollinator-game-canvas" width="600" height="400" class="rounded-lg"></canvas>
@@ -547,6 +549,19 @@
         let beetle = { x: 50, y: 50, size: 20, velX: 0, velY: 0, baseSpeed: 3, speed: 3, pollenType: null };
         let gameStage = 0; // 0: Start Screen, 1: Playing, 2: Win Screen
         let keys = {};
+
+        // --- WIND GUST STATE ---
+        let wind = {
+            isGusting: false,
+            direction: 'none', // 'up', 'down', 'left', 'right'
+            strength: 0,
+            gustDuration: 3000, // 3 seconds
+            intervalMin: 8000, // 8 seconds min wait
+            intervalMax: 15000, // 15 seconds max wait
+            nextGustTime: 0,
+            gustEndTime: 0
+        };
+        // --- END WIND GUST STATE ---
         
         // Define the sticky sap area
         const SLOW_ZONE = { x: 250, y: 150, width: 100, height: 100, color: '#A0522D', effect: 0.5 }; // Sienna Brown
@@ -622,8 +637,41 @@
                    py > rect.y && py < rect.y + rect.height;
         }
 
+        // Functions for Wind Gust Timing
+        function startWindTimer() {
+            wind.nextGustTime = Date.now() + wind.intervalMin + Math.random() * (wind.intervalMax - wind.intervalMin);
+        }
+
+        function activateGust() {
+            wind.isGusting = true;
+            wind.direction = ['up', 'down', 'left', 'right'][Math.floor(Math.random() * 4)];
+            wind.strength = 1 + Math.random() * 2; // Strength between 1 and 3
+            wind.gustEndTime = Date.now() + wind.gustDuration;
+            console.log(`Wind Gust activated: ${wind.direction} at strength ${wind.strength.toFixed(2)}`);
+        }
+
+
         function update() {
             if (gameStage !== 1) return;
+
+            const now = Date.now();
+
+            // --- Wind Gust Logic Update ---
+            if (wind.isGusting) {
+                if (now > wind.gustEndTime) {
+                    wind.isGusting = false;
+                    wind.direction = 'none';
+                    wind.strength = 0;
+                    startWindTimer(); // Set timer for next gust
+                    console.log("Wind Gust ended. Next gust scheduled.");
+                }
+            } else {
+                if (now > wind.nextGustTime) {
+                    activateGust(); // Start a new gust
+                }
+            }
+            // --- End Wind Gust Logic Update ---
+
 
             // --- Obstacle Logic (Complexity 2) ---
             const inSlowZone = isPointInRect(beetle.x, beetle.y, SLOW_ZONE);
@@ -633,11 +681,22 @@
             beetle.velX = 0;
             beetle.velY = 0;
 
-            // Handle Movement 
+            // Handle Movement (User Input)
             if (keys['ArrowUp'] || keys['up']) beetle.velY = -beetle.speed;
             if (keys['ArrowDown'] || keys['down']) beetle.velY = beetle.speed;
             if (keys['ArrowLeft'] || keys['left']) beetle.velX = -beetle.speed;
             if (keys['ArrowRight'] || keys['right']) beetle.velX = beetle.speed;
+
+            // --- Apply Wind Force (Additive) ---
+            if (wind.isGusting) {
+                switch (wind.direction) {
+                    case 'up': beetle.velY -= wind.strength; break;
+                    case 'down': beetle.velY += wind.strength; break;
+                    case 'left': beetle.velX -= wind.strength; break;
+                    case 'right': beetle.velX += wind.strength; break;
+                }
+            }
+            // --- End Apply Wind Force ---
 
             // Update position
             beetle.x += beetle.velX;
@@ -770,6 +829,49 @@
             ctx.fillText('STICKY SAP', SLOW_ZONE.x + SLOW_ZONE.width / 2, SLOW_ZONE.y + SLOW_ZONE.height / 2);
         }
 
+        function drawWindIndicator() {
+            if (!wind.isGusting) return;
+
+            const cx = canvas.width / 2;
+            const cy = 40; // Position near the top
+
+            ctx.save();
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'rgba(255, 69, 0, 0.8)'; // Red/Orange color
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+
+            // Draw "WIND GUST!" text
+            ctx.font = '30px Impact, sans-serif';
+            ctx.fillText('WIND GUST!', cx, cy + 5);
+
+            // Determine rotation and arrow text
+            let arrow = ''; 
+
+            switch (wind.direction) {
+                case 'up':
+                    arrow = '▲';
+                    break;
+                case 'down':
+                    arrow = '▼';
+                    break;
+                case 'left':
+                    arrow = '◀';
+                    break;
+                case 'right':
+                    arrow = '▶';
+                    break;
+            }
+            
+            // Draw the directional arrow
+            ctx.font = '50px Arial';
+            ctx.fillStyle = 'rgba(255, 69, 0, 1.0)';
+            ctx.fillText(arrow, cx, cy + 50);
+
+            ctx.restore();
+        }
+
+
         function drawGame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
             ctx.fillStyle = '#A0DFA0';
@@ -782,6 +884,7 @@
                 drawFlowers();
                 drawBeetle();
                 drawStatus();
+                drawWindIndicator(); // Draw the new indicator
             } else if (gameStage === 2) {
                 drawWinScreen();
             }
@@ -793,10 +896,11 @@
             ctx.fillStyle = 'white';
             ctx.font = '30px Inter';
             ctx.textAlign = 'center';
-            ctx.fillText('The Pollination Challenge 2.0', canvas.width / 2, canvas.height / 3);
+            ctx.fillText('The Pollination Challenge 3.0 (with Wind Gusts!)', canvas.width / 2, canvas.height / 3);
             ctx.font = '18px Inter';
             ctx.fillText('Complete BOTH the YELLOW and BLUE pollen chains.', canvas.width / 2, canvas.height / 3 + 40);
-            ctx.fillText('Avoid the sticky sap! Press SPACE or click to start.', canvas.width / 2, canvas.height / 2);
+            ctx.fillText('Avoid the sticky sap, and brace for random wind!', canvas.width / 2, canvas.height / 3 + 70);
+            ctx.fillText('Press SPACE or click to start.', canvas.width / 2, canvas.height / 2 + 30);
         }
 
         function drawWinScreen() {
@@ -819,7 +923,7 @@
 
         function drawStatus() {
             const pollenStatus = beetle.pollenType ? `Pollen: ${beetle.pollenType.toUpperCase()}` : "Pollen: EMPTY";
-            const speedStatus = beetle.speed < beetle.baseSpeed ? "SPEED: SLOWED (Sticky Sap!)" : "SPEED: NORMAL";
+            const speedStatus = beetle.speed < beetle.baseSpeed ? "SPEED: SLOWED (Sap!)" : "SPEED: NORMAL";
             
             ctx.fillStyle = '#2E7D32';
             ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
@@ -854,6 +958,19 @@
                 pollinated: false,
                 pollenCollected: false
             }));
+
+            // Reset Wind State on game reset
+            wind = {
+                isGusting: false,
+                direction: 'none',
+                strength: 0,
+                gustDuration: 3000, 
+                intervalMin: 8000, 
+                intervalMax: 15000, 
+                nextGustTime: 0,
+                gustEndTime: 0
+            };
+            startWindTimer(); // Start the first timer
         }
 
         function handleGameInput(e) {
