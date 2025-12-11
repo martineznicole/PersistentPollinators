@@ -130,31 +130,7 @@
             </div>
         </section>
         
-        <!-- Longhorn Beetle Game Section (NEW) -->
-        ---
-        <section class="mb-12 p-6 bg-white rounded-xl card-shadow">
-            <h2 class="text-3xl font-bold text-accent mb-4 text-center">The Longhorn Beetle Pollination Challenge 3.0</h2>
-            <p class="text-center text-gray-700 mb-4">Use the **Arrow Keys** (or D-Pad/Click targets below) to control the Longhorn Beetle ($ \bullet $) and complete the **Yellow** and **Blue** pollination chains. Avoid the sticky brown sap and fight the **wind gusts**!</p>
-
-            <div class="relative max-w-2xl mx-auto bg-gray-100 rounded-lg p-2 shadow-inner">
-                <canvas id="pollinator-game-canvas" width="600" height="400" class="rounded-lg"></canvas>
-            </div>
-            
-            <div id="controls-container" class="max-w-xs mx-auto mt-4 p-4 bg-gray-100 rounded-lg md:hidden">
-                <h3 class="text-lg font-semibold text-dark-bg mb-2 text-center">Touch Controls (D-Pad)</h3>
-                <div class="grid grid-cols-3 gap-2">
-                    <div></div>
-                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="up">&#x25B2;</button>
-                    <div></div>
-                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="left">&#x25C4;</button>
-                    <button class="bg-gray-300 py-2 rounded-lg text-gray-600 font-bold text-sm">MOVE</button>
-                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="right">&#x25BA;</button>
-                    <div></div>
-                    <button class="control-btn bg-primary hover:bg-green-600 text-white font-bold py-2 rounded-lg" data-dir="down">&#x25BC;</button>
-                    <div></div>
-                </div>
-            </div>
-
+     
         </section>
 
         <!-- Interactive Pollinator Discovery Section (Existing) -->
@@ -211,34 +187,8 @@
                     <button id="action-button" class="w-full bg-accent hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full transition duration-300" onclick="performAction()"></button>
                 </div>
             </div>
-        </section>
-        
-        <!-- Share Your Action Section (Existing Form) -->
-        ---
-        <section id="share-action" class="mt-12 mb-12 p-6 bg-white rounded-xl card-shadow">
-            <h2 class="text-3xl font-bold text-dark-bg mb-4 text-center">Share Your Pollinator Action!</h2>
-            <p class="text-center text-gray-600 mb-6">Join the community by logging what you're doing to help pollinators. Your action will be saved to our public map!</p>
+<!-- Share Your Pollination Action! -->
 
-            <div class="max-w-xl mx-auto space-y-4">
-                <div>
-                    <label for="action-location" class="block text-sm font-medium text-gray-700">Your Location (City, State/Country)</label>
-                    <input type="text" id="action-location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="e.g., San Francisco, CA" required>
-                </div>
-                <div>
-                    <label for="action-description" class="block text-sm font-medium text-gray-700">Your Action (What did you do?)</label>
-                    <textarea id="action-description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="e.g., I planted milkweed in my garden." required></textarea>
-                </div>
-                <div>
-                    <label for="action-photo-url" class="block text-sm font-medium text-gray-700">Optional Photo URL (Link to image - Max 1MB)</label>
-                    <input type="url" id="action-photo-url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3 border" placeholder="https://example.com/my-garden.jpg">
-                </div>
-                <button id="submit-action-btn" class="w-full bg-primary hover:bg-dark-bg text-white font-bold py-3 px-4 rounded-full transition duration-300 disabled:opacity-50" onclick="savePollinatorAction()">
-                    Submit Action
-                </button>
-                <p id="action-message-status" class="text-center text-sm mt-2 hidden"></p>
-                <p id="user-id-display" class="text-xs text-center text-gray-400 mt-4"></p>
-            </div>
-        </section>
 
         <!-- Community Action Feed (NEW) -->
         <section id="community-actions" class="mt-12 mb-12 p-6 bg-white rounded-xl card-shadow">
